@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloque de Pantalla</title>
+</head>
+<body>
+
+    <h2>Timepo de Inicial: <span id="tiempoInicial"></span></h2>
+    <h2>Tiempo Final: <span id="tiempoFinal"></span></h2>
+    <h3>Cronometro: <span id="tiempo"></span></h3>
+
+<script language="javascript">
+    window.onload = function(){
+        let cronometro;		//variable para almacenar la funcion tiempo
+
+        //Para el cronometro cada vez que actualize el tiempo
+        function pararCronometro(){
+            clearInterval(cronometro);
+        };
+
+        document.onmouseover = function(){
+            let fecha = new Date(); //Se usa para saber el horario
+            let inicial;	        //Tiempo del ultimo movimiento de mouse
+            let limite;			    //Tiempo limite
+
+            inicial = fecha.getMinutes();
+            limite = inicial + 1;   //Tiempo limite definido en Min.
+
+            if (limite >= 60) {
+                limite = limite - 60;
+            }
+
+            pararCronometro();		//llamo a la func para parar el crono
+            console.log(inicial,limite);
+
+            //Mostrar en pantalla
+            document.getElementById("tiempoInicial").innerHTML=inicial;
+            document.getElementById("tiempoFinal").innerHTML=limite;
+
+
+            let dif = 0;
+            //setInterval Es una funcion especial de JS es por tiempo
+            cronometro = setInterval(function(){
+                dif++;
+                console.log(dif);
+                document.getElementById("tiempo").innerHTML= dif;
+                if (dif == 60) {
+                    inicial++;
+                    if (inicial >= 60)
+                        inicial = 0;
+
+                    if (inicial == limite) {
+                        window.location.href='/lock.html';
+                }
+                }
+                //bloqueoPantalla(inicial,limite);
+
+            },1000);   //60000
+        };
+
+        // function bloqueoPantalla(inicial,limite){
+        //     if (inicial == limite) {
+        //         window.location.href='<?php echo SERVERURL;?>lock';
+        //     }
+        // }
+    };
+</script>
+</body>
+</html>
