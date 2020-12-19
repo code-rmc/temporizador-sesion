@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloque de Pantalla</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h2>Timepo de Inicial: <span id="tiempoInicial"></span></h2>
-    <h2>Tiempo Final: <span id="tiempoFinal"></span></h2>
-    <h3>Cronometro: <span id="tiempo"></span></h3>
+    <main id="index">
+        <h2>Hora: <span id="tiempoInicial"></span></h2>
+        <h2>Tiempo Final: <span id="tiempoFinal"></span></h2>
+        <h3>Cronometro: <span id="tiempo"></span></h3>
+    </main>
 
 <script language="javascript">
     window.onload = function(){
         let cronometro;		//variable para almacenar la funcion tiempo
 
         //Para el cronometro cada vez que actualize el tiempo
-        function pararCronometro(){
+        function reiniciarCronometro(){
             clearInterval(cronometro);
         };
 
@@ -26,17 +29,17 @@
             let limite;			    //Tiempo limite
 
             inicial = fecha.getMinutes();
-            limite = inicial + 1;   //Tiempo limite definido en Min.
+            limite = inicial + 10;   //Tiempo limite definido en Min.
 
             if (limite >= 60) {
                 limite = limite - 60;
             }
 
-            pararCronometro();		//llamo a la func para parar el crono
+            reiniciarCronometro();		//llamo a la func para parar el crono
             console.log(inicial,limite);
 
             //Mostrar en pantalla
-            document.getElementById("tiempoInicial").innerHTML=inicial;
+            document.getElementById("tiempoInicial").innerHTML=fecha;
             document.getElementById("tiempoFinal").innerHTML=limite;
 
 
