@@ -8,67 +8,74 @@
 </head>
 <body>
 
+
     <main id="index">
-        <h2>Hora: <span id="tiempoInicial"></span></h2>
-        <h2>Tiempo Final: <span id="tiempoFinal"></span></h2>
+        <h2>Hora: <span id="horas"></span>:<span id="minutos"></span>:<span id="segundos"></span></h2>
         <h3>Cronometro: <span id="tiempo"></span></h3>
+        <h4>Tiempo Final: <span id="tiempoFinal"></span> Seg</h4>
     </main>
 
+
+
 <script language="javascript">
+
     window.onload = function(){
         let cronometro;		//variable para almacenar la funcion tiempo
 
-        //Para el cronometro cada vez que actualize el tiempo
-        function reiniciarCronometro(){
-            clearInterval(cronometro);
+        //Reinicia el cronometro cada vez que actualize el tiempo
+        function reiniciarCronometro(a){
+            clearInterval(a);
         };
 
-        document.onmouseover = function(){
-            let fecha = new Date(); //Se usa para saber el horario
-            let inicial;	        //Tiempo del ultimo movimiento de mouse
+        document.getElementById("index").onmousemove = function(){
             let limite;			    //Tiempo limite
+            let cont = 0;
 
-            inicial = fecha.getMinutes();
-            limite = inicial + 10;   //Tiempo limite definido en Min.
+            limite = 1 * 60;        //Tiempo limite definido en Seg. (1 Mint)
 
-            if (limite >= 60) {
-                limite = limite - 60;
-            }
-
-            reiniciarCronometro();		//llamo a la func para parar el crono
-            console.log(inicial,limite);
+            reiniciarCronometro(cronometro);	//llamo a la funcion para reiniciar el cronometro
 
             //Mostrar en pantalla
-            document.getElementById("tiempoInicial").innerHTML=fecha;
-            document.getElementById("tiempoFinal").innerHTML=limite;
+            document.getElementById("tiempoFinal").innerHTML = limite;
 
-
-            let dif = 0;
-            //setInterval Es una funcion especial de JS es por tiempo
+            //setInterval Es una funcion especial de JS por tiempo
             cronometro = setInterval(function(){
-                dif++;
-                console.log(dif);
-                document.getElementById("tiempo").innerHTML= dif;
-                if (dif == 60) {
-                    inicial++;
-                    if (inicial >= 60)
-                        inicial = 0;
+                cont++;
 
-                    if (inicial == limite) {
-                        window.location.href='/lock.html';
-                }
-                }
-                //bloqueoPantalla(inicial,limite);
+                document.getElementById("tiempo").innerHTML= cont;
 
-            },1000);   //60000
+                if (cont == limite)
+                    window.location.href='/lock.html';
+            },1000);   //1 seg
         };
-
-        // function bloqueoPantalla(inicial,limite){
-        //     if (inicial == limite) {
-        //         window.location.href='<?php echo SERVERURL;?>lock';
-        //     }
-        // }
     };
+
+    //*********************************************
+    //******************RELOJ**********************
+    //*********************************************
+
+	var intervalo = setInterval(actualizarHora,1000);
+
+	function actualizarHora(){
+		let time = new Date();
+		let hora = time.getHours(),
+			minutos = time.getMinutes(),
+			segundos = time.getSeconds();
+
+		let phoras 	= document.getElementById('horas'),
+			pminutos = document.getElementById('minutos'),
+			psegundos = document.getElementById('segundos');
+
+		//hora
+		if ( hora < 10 ) { hora = "0"+hora;	}
+		    phoras.textContent = hora;
+		//minuto
+		if ( minutos < 10 ) { minutos = "0"+minutos; }
+		    pminutos.textContent = minutos;
+		//segundos
+		if ( segundos < 10 ) { segundos = "0"+segundos;	}
+		    psegundos.textContent = segundos;
+	};
 </script>
 </body>
 </html>

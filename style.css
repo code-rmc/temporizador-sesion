@@ -3,6 +3,14 @@ body{
     padding: 0;
     box-sizing: border-box;
 }
+h2{
+    font-size: 1.9em;
+}
+h4{
+    margin: 0;
+    padding: 0;
+    color: #bebb14;
+}
 #index{
     background: #6441A5;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #2a0845, #6441A5);  /* Chrome 10-25, Safari 5.1-6 */
@@ -56,6 +64,7 @@ body{
     border: 1px solid #a3a3a3;
     border-radius: 2px;
     width: 180px;
+    color: #000000;
 }
 .login > a{
     background-color: #0d6860;
